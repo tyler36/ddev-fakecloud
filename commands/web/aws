@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+## #ddev-generated
+## Description: AWS
+## Usage: aws [flags] [args]
+## Example: "ddev aws"
+
+aws "$@"

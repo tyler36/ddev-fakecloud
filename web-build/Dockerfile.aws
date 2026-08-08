@@ -1,0 +1,13 @@
+## #ddev-generated
+
+# Switch to current User
+USER $username
+
+# Install the needed development packages
+RUN curl -fsSL https://awscli.amazonaws.com/v2/install.sh | bash > ~/aws-install.txt
+
+# Return to ROOT user
+USER root
+
+# "aws" help commands require "groff" or "mandoc", so we'll install one of them here.
+RUN sudo apt-get update && sudo apt-get install mandoc -y

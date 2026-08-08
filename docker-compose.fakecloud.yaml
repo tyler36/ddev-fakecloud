@@ -1,0 +1,25 @@
+#ddev-generated
+services:
+  fakecloud:
+    container_name: ddev-${DDEV_SITENAME}-fakecloud
+    image: ${FAKECLOUD_DOCKER_IMAGE:-ghcr.io/faiscadev/fakecloud:latest}
+    restart: "no"
+    # These labels ensure this service is discoverable by DDEV.
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: ${DDEV_APPROOT}
+
+    volumes:
+      - ".:/mnt/ddev_config"
+      - "ddev-global-cache:/mnt/ddev-global-cache"
+      - /var/run/docker.sock:/var/run/docker.sock # required for Lambda Invoke
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # required for Lambda Invoke
+    healthcheck:
+      test: ["CMD", "fakecloud", "healthcheck"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 2s
+    environment:
+      FAKECLOUD_LOG: info

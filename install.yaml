@@ -1,0 +1,8 @@
+name: ddev-fakecloud
+
+project_files:
+  - docker-compose.fakecloud.yaml
+  - web-build/Dockerfile.aws
+  - commands/web/aws
+  - commands/web/fakecloud
+ddev_version_constraint: '>= v1.24.10'
